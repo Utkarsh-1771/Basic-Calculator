@@ -10,6 +10,10 @@ html {
 body {
     background: beige;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 #buttons {
@@ -29,8 +33,18 @@ button {
 
 #display {
     font-family: monospace;
+    background: black;
+    color: white;
+    text-align: right;
+    padding: 20px;
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
 #calculator {
     width: 320px;
+}
+
+.equal-button {
+    grid-column: span 2;
 }
