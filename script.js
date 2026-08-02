@@ -5,6 +5,13 @@ let firstNumber = null;
 let operator = null;
 buttons.forEach(function (button) {
     button.addEventListener("click", function () {
+        if (button.classList.contains("clear-button")) {
+            currentInput = "0";
+            firstNumber = null;
+            operator = null;
+            screen.textContent = currentInput;
+            return;
+        }
         if (button.classList.contains("equal-button")) {
             let result;
             if (operator == "+")
@@ -13,8 +20,12 @@ buttons.forEach(function (button) {
                 result = firstNumber - Number(currentInput);
             else if (operator == "×")
                 result = firstNumber * Number(currentInput);
-            else if (operator == "÷")
-                result = firstNumber / Number(currentInput);
+            else if (operator == "÷") {
+                if (currentInput === "0")
+                    result = "UNDEFINED";
+                else
+                    result = firstNumber / Number(currentInput);
+            }
             currentInput = String(result);
             screen.textContent = currentInput;
             return;
