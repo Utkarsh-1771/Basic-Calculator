@@ -3,6 +3,20 @@ const buttons = document.querySelectorAll("button");
 let currentInput = "0";
 let firstNumber = null;
 let operator = null;
+function calculate(first, op, second) {
+    if (op == "+")
+        return first + second;
+    else if (op == "−")
+        return first - second;
+    else if (op == "×")
+        return first * second;
+    else if (op == "÷") {
+        if (second === 0)
+            return "UNDEFINED";
+        else
+            return first / second;
+    }
+}
 buttons.forEach(function (button) {
     button.addEventListener("click", function () {
         if (button.classList.contains("clear-button")) {
@@ -13,25 +27,19 @@ buttons.forEach(function (button) {
             return;
         }
         if (button.classList.contains("equal-button")) {
-            let result;
-            if (operator == "+")
-                result = firstNumber + Number(currentInput);
-            else if (operator == "−")
-                result = firstNumber - Number(currentInput);
-            else if (operator == "×")
-                result = firstNumber * Number(currentInput);
-            else if (operator == "÷") {
-                if (currentInput === "0")
-                    result = "UNDEFINED";
-                else
-                    result = firstNumber / Number(currentInput);
-            }
+            let result = calculate(firstNumber, operator, Number(currentInput));
             currentInput = String(result);
             screen.textContent = currentInput;
             return;
         }
         if (button.classList.contains("operator")) {
-            firstNumber = Number(currentInput);
+            if (operator !== null) {
+                let pending = calculate(firstNumber, operator, Number(currentInput));
+                firstNumber = pending;
+            }
+            else if (operator === null) {
+                firstNumber = Number(currentInput);
+            }
             operator = button.textContent;
             currentInput = "0";
             return;
