@@ -45,6 +45,13 @@ button {
     width: 320px;
 }
 
+@media(max-width:400px) {
+    #calculator {
+        width: 90%;
+    }
+
+}
+
 .equal-button {
     grid-column: span 2;
 }
